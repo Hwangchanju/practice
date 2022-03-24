@@ -15,6 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.spring.practice.model.SelectTableVO;
 import com.spring.practice.service.SelectTableService;
 
+/*회원명	mbr_nm		varchar(20)	tbaxnm003
+주문번호	bzpp_order_no	varchar(6)	tbaxbm001
+사업자명	bzpp_nm		varchar(20)	tbaxbm001
+폰번호	mbr_phone	varchar(11)	tbaxnm003
+제품명	pdt_nm		varchar(100)	tbaxpm001
+제품번호	pdt_no		varchar(10)	tbaxpm001
+삭제유무	del_yn		varchar(1)	tbaxnm003*/
+
 @Controller
 public class SelectTableController {
 
