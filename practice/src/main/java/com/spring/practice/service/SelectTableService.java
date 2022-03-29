@@ -4,5 +4,7 @@ import com.spring.practice.model.SelectTableVO;
 
 public interface SelectTableService {
 
+	void selectKeyList(String[] keyList);
+
 	
 }

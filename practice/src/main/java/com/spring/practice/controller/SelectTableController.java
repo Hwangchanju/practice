@@ -1,6 +1,7 @@
 package com.spring.practice.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,55 +30,60 @@ public class SelectTableController {
 	@Autowired
 	private SelectTableService stService;
 	
-	@RequestMapping("/inquire")
-	public String inquire(Model listM, HttpServletRequest request, HttpServletResponse response, @ModelAttribute SelectTableVO stVO, HttpSession session)
+	@RequestMapping(value="/inquire")
+	public String inquire(HttpServletRequest request, HttpServletResponse response)
 			throws Exception{
 		
 		response.setContentType("text/html;charset=UTF-8");
 		
-		String[] slist = {"mbr_nm", "bzpp_order_no", "bzpp_nm", "mbr_phone", "pdt_nm", "pdt_no", "del_yn"};
+		HashMap<String, String> voMap = new HashMap<String, String>(7);
+		
+		String mbr_phone1 = request.getParameter("mbr_phone1");
+		String mbr_phone2 = request.getParameter("mbr_phone2");
+		
+		String mbr_phone;
+		
+		if(mbr_phone1 == null && mbr_phone2 == null) {
+			mbr_phone = "";
+		}else if(mbr_phone1 == null) {
+			mbr_phone = "%" + mbr_phone2;
+		}else {
+			mbr_phone = mbr_phone1 + "%";
+		}
+
+		voMap.put("mbr_nm", request.getParameter("mbr_nm"));
+		voMap.put("bzpp_order_no", request.getParameter("bzpp_order_no"));
+		voMap.put("bzpp_nm", request.getParameter("bzpp_nm"));
+		voMap.put("mbr_phone", mbr_phone);
+		voMap.put("pdt_nm", request.getParameter("pdt_nm"));
+		voMap.put("pdt_no", request.getParameter("pdt_no"));
+		voMap.put("del_yn", request.getParameter("del_yn"));
+		
+		String[] keyList = new String[voMap.size()];
+		
+		Iterator<String> iter = voMap.keySet().iterator();
+		
+		while(iter.hasNext()) {
+			int index = 0;
 			
-		stVO.setMbr_nm(request.getParameter("mbr_nm"));
-		stVO.setBzpp_order_no(request.getParameter("bzpp_order_no"));
-		stVO.setBzpp_nm(request.getParameter("bzpp_nm"));
-		stVO.setMbr_phone(request.getParameter("mbr_phone1")+request.getParameter("mbr_phone2")+request.getParameter("mbr_phone3"));
-		stVO.setPdt_nm(request.getParameter("pdt_nm"));
-		stVO.setPdt_no(request.getParameter("pdt_no"));
-		stVO.setDel_yn(request.getParameter("del_yn"));
+			keyList[index] = iter.next();
+			index++;
+		}
 		
-		String[] stlist = new String[7];
-		
-		stlist[0] = stVO.getMbr_nm();
-		stlist[1] = stVO.getBzpp_order_no();
-		stlist[2] = stVO.getBzpp_nm();
-		stlist[3] = stVO.getMbr_phone();
-		stlist[4] = stVO.getPdt_nm();
-		stlist[5] = stVO.getPdt_no();
-		stlist[6] = stVO.getDel_yn();
-		boolean[] clist = new boolean[7];
-		
-		for(int i=0; i<stlist.length; i++) {
-			if(i==3) {
-				if(stlist[i]=="010" || stlist[i] == "011" || stlist[i] == )
-			}else if(i==6) {
-				
+		for(int i=0; i<voMap.size(); i++) {
+			if(voMap.containsKey(keyList[i])) {
+				continue;
 			}else {
-				
+				keyList[i] = null;
 			}
 		}
 		
-		
-		
-		
-		
-
-		
-		
-		
+		this.stService.selectKeyList(keyList);
 		
 		return "inquire";
 		
 	}
+}
 	
 //	@RequestMapping("/inquire_ok")
 //	public List<SelectTableVO> inquire_ok(){
@@ -88,4 +94,4 @@ public class SelectTableController {
 //	}
 	
 	
-}
+//}

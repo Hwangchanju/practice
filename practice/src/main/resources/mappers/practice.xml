@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="practice">
+ 
+ <select id="db_select" resultType="stVO">
+ 	
+ 	select
+	n03.mbr_no
+	, b01.bzpp_order_no
+	, b01.bzpp_nm
+	, n03.mbr_phone
+	, p04.pdt_nm
+	, p04.pdt_no
+	, n03.mbr_no
+	from
+		tbaxbm001 b01
+		, tbaxnm003 n03
+		, tbaxpm001 p04
+	where
+		1 = 1
+	and
+	n03.bzpp_order_no = b01.bzpp_order_no
+	and
+	p04.bzpp_order_no = b01.bzpp_order_no;
+ 	
+ </select>
+ 
+ 
+</mapper>

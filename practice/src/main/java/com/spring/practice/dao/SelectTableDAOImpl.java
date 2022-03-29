@@ -11,4 +11,10 @@ public class SelectTableDAOImpl implements SelectTableDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
+
+	@Override
+	public void selectKeyList(String[] keyList) {
+		this.sqlSession.selectList("db_select", keyList);
+		
+	}
 }

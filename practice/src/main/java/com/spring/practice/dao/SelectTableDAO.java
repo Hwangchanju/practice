@@ -4,4 +4,6 @@ import com.spring.practice.model.SelectTableVO;
 
 public interface SelectTableDAO {
 
+	void selectKeyList(String[] keyList);
+
 }

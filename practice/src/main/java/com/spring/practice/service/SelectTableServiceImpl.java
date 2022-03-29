@@ -10,4 +10,10 @@ public class SelectTableServiceImpl implements SelectTableService {
 
 	@Autowired
 	private SelectTableDAO stDAO;
+
+	@Override
+	public void selectKeyList(String[] keyList) {
+		this.stDAO.selectKeyList(keyList);
+		
+	}
 }
