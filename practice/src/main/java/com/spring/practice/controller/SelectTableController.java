@@ -30,7 +30,7 @@ public class SelectTableController {
 	@Autowired
 	private SelectTableService stService;
 	
-	@RequestMapping(value="/inquire")
+	@RequestMapping(value="/select")
 	public String inquire(HttpServletRequest request, HttpServletResponse response)
 			throws Exception{
 		
@@ -80,7 +80,7 @@ public class SelectTableController {
 		
 		this.stService.selectKeyList(keyList);
 		
-		return "inquire";
+		return "select";
 		
 	}
 }
