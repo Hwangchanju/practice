@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="select">
+ 
+ <select id="select_list" parameterType="java.util.HashMap" resultType="stVO">
+ 	
+ 	select
+	usr.mbr_no
+	, bzp.bzpp_order_no
+	, bzp.bzpp_nm
+	, usr.mbr_phone
+	, pdt.pdt_nm
+	, pdt.pdt_no
+	, usr.mbr_no
+	, usr.del_yn
+	from
+		tbaxbm001 bzp
+		, tbaxnm003 usr
+		, tbaxpm001 pdt
+	
+	where 1 = 1
+	
+	and
+	usr.bzpp_order_no = bzp.bzpp_order_no
+	and
+	pdt.bzpp_order_no = bzp.bzpp_order_no;
+	and
+	usr.del_yn = ${del_yn}
+	
+	<if test="mbr_no neq null and mbr_no neq ''">
+	<![CDATA[
+		and
+		usr.mbr_no = ${mbr_no}
+	]]>
+ 	</if>
+ 	
+ 	<if test="bzpp_order_no neq null and bzpp_order_no neq ''">
+	<![CDATA[
+		and
+		bzp.bzpp_order_no = ${bzpp_order_no}
+	]]>
+ 	</if>
+ 	
+ 	<if test="bzpp_nm neq null and bzpp_nm neq ''">
+	<![CDATA[
+		and
+		bzp.bzpp_nm = ${bzpp_nm}
+	]]>
+ 	</if>
+ 	
+ 	<if test="mbr_phone neq null and mbr_phone neq ''">
+	<![CDATA[
+		and
+		usr.mbr_phone = ${mbr_phone}
+	]]>
+ 	</if>
+ 	
+ 	<if test="pdt_nm neq null and pdt_nm neq ''">
+	<![CDATA[
+		and
+		pdt.pdt_nm = ${pdt_nm}
+	]]>
+ 	</if>
+ 	
+ 	<if test="pdt_no neq null and pdt_no neq ''">
+	<![CDATA[
+		and
+		pdt.pdt_no = ${pdt_no}
+	]]>
+ 	</if>
+ 	
+ 	
+ 	
+ </select>
+ 
+ 
+</mapper>

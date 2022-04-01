@@ -1,11 +1,11 @@
 package com.spring.practice.dao;
 
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.spring.practice.model.SelectTableVO;
 @Repository
 public class SelectTableDAOImpl implements SelectTableDAO {
 
@@ -13,8 +13,9 @@ public class SelectTableDAOImpl implements SelectTableDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public void selectKeyList(String[] keyList) {
-		this.sqlSession.selectList("db_select", keyList);
+	public void getSelectList(HashMap<String, Object> inq_Data) {
+		
+		this.sqlSession.selectList("select_list", inq_Data);
 		
 	}
 }

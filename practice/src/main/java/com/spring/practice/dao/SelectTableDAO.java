@@ -1,9 +1,9 @@
 package com.spring.practice.dao;
 
-import com.spring.practice.model.SelectTableVO;
+import java.util.HashMap;
 
 public interface SelectTableDAO {
 
-	void selectKeyList(String[] keyList);
+	void getSelectList(HashMap<String, Object> inq_Data);
 
 }

@@ -1,5 +1,8 @@
 package com.spring.practice.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +15,8 @@ public class SelectTableServiceImpl implements SelectTableService {
 	private SelectTableDAO stDAO;
 
 	@Override
-	public void selectKeyList(String[] keyList) {
-		this.stDAO.selectKeyList(keyList);
-		
+	public List<SelectTableVO> getSelectList(HashMap<String, Object> inq_Data) {
+
+		return this.getSelectList(inq_Data);
 	}
 }

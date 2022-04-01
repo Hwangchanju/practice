@@ -1,10 +1,13 @@
 package com.spring.practice.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.spring.practice.model.SelectTableVO;
 
 public interface SelectTableService {
 
-	void selectKeyList(String[] keyList);
+	List<SelectTableVO> getSelectList(HashMap<String, Object> inq_Data);
 
 	
 }

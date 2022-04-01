@@ -1,17 +1,14 @@
 package com.spring.practice.controller;
 
 import java.util.HashMap;
-import java.util.Iterator;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.practice.model.SelectTableVO;
 import com.spring.practice.service.SelectTableService;
@@ -31,67 +28,31 @@ public class SelectTableController {
 	private SelectTableService stService;
 	
 	@RequestMapping(value="/select")
-	public String inquire(HttpServletRequest request, HttpServletResponse response)
+	public String select()
 			throws Exception{
-		
-		response.setContentType("text/html;charset=UTF-8");
-		
-		HashMap<String, String> voMap = new HashMap<String, String>(7);
-		
-		String mbr_phone1 = request.getParameter("mbr_phone1");
-		String mbr_phone2 = request.getParameter("mbr_phone2");
-		
-		String mbr_phone;
-		
-		if(mbr_phone1 == null && mbr_phone2 == null) {
-			mbr_phone = "";
-		}else if(mbr_phone1 == null) {
-			mbr_phone = "%" + mbr_phone2;
-		}else {
-			mbr_phone = mbr_phone1 + "%";
-		}
-
-		voMap.put("mbr_nm", request.getParameter("mbr_nm"));
-		voMap.put("bzpp_order_no", request.getParameter("bzpp_order_no"));
-		voMap.put("bzpp_nm", request.getParameter("bzpp_nm"));
-		voMap.put("mbr_phone", mbr_phone);
-		voMap.put("pdt_nm", request.getParameter("pdt_nm"));
-		voMap.put("pdt_no", request.getParameter("pdt_no"));
-		voMap.put("del_yn", request.getParameter("del_yn"));
-		
-		String[] keyList = new String[voMap.size()];
-		
-		Iterator<String> iter = voMap.keySet().iterator();
-		
-		while(iter.hasNext()) {
-			int index = 0;
-			
-			keyList[index] = iter.next();
-			index++;
-		}
-		
-		for(int i=0; i<voMap.size(); i++) {
-			if(voMap.containsKey(keyList[i])) {
-				continue;
-			}else {
-				keyList[i] = null;
-			}
-		}
-		
-		this.stService.selectKeyList(keyList);
 		
 		return "select";
 		
 	}
+	
+	  @GetMapping(value="/select_ok", produces="application/json; charset=UTF-8")
+	  public List<SelectTableVO> select_ok(@RequestBody HashMap<String, Object> inq_Data){
+		  
+		  
+		  inq_Data.forEach((key, value)->{ 
+			  if(!inq_Data.containsKey(key)) {
+				  inq_Data.remove(key); } 
+	  });
+	  
+	  List<SelectTableVO> resultList = stService.getSelectList(inq_Data);
+	  
+	  System.out.println("resultList  ::::::" + resultList.toString());
+	  
+	  return resultList; }
+	  
+	 
+	
 }
 	
-//	@RequestMapping("/inquire_ok")
-//	public List<SelectTableVO> inquire_ok(){
-//		
-//		
-//		
-//		return;
-//	}
-	
-	
-//}
+		
+ 
