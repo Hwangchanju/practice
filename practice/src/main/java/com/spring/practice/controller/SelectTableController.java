@@ -28,64 +28,42 @@ public class SelectTableController {
 
 	@Autowired
 	private SelectTableService stService;
-	
-	@RequestMapping(value="select")
-	public String select()
-			throws Exception{
-		
-		return "select";
-		
-	}
-	
+
+	  @RequestMapping(value="select")
+	  public String select() throws Exception{
+	  
+		  return "select";
+	  
+	  }
+	 
 	  @PostMapping(value="select_ok", produces="application/json; charset=UTF-8")
 	  public @ResponseBody List<SelectTableVO> select_ok(@RequestBody HashMap<String, Object> reqData)throws Exception{
 		  
 			System.out.println(reqData.toString());
-			
-			
-			
-			/*
-			 * System.out.println("ㅋ");
-			 * 
-			 * 
-			 * int index = reqData.size();
-			 * 
-			 * for(int i=0; i<index; i++) { for(String key : reqData.keySet()) {
-			 * if(reqData.get(key).equals("")) { reqData.remove(key); break; } } }
-			 * 
-			 * 
-			 * System.out.println(reqData.toString());  > 받아온 맵에 밸류는 없고 키만 있는 경우 해당 키 값 삭제
-			 */
-			
-			
-			  List<SelectTableVO> resultList = new ArrayList<SelectTableVO>(); 
-			
-			  if(!(reqData.get("mbr_phone").equals(""))) { 
-				  
-				  String replacePhone = (String)(reqData.get("mbr_phone"));
-				  System.out.println("1번 : " + replacePhone);
-				  replacePhone = replacePhone.replaceAll("-", "");
-				  System.out.println("2번 : " + replacePhone);
-					/* System.out.println("3번" + reqData.get("mbr_phone")); */
-				  
-				  reqData.replace("mbr_phone", (Object)replacePhone);
-				  System.out.println("4번 : " + reqData.get("mbr_phone"));
-			  }
-			  
-			  resultList = stService.getSelectList(reqData);
-			  
-			  System.out.println("주문번호 ::::: " +resultList);
-			  for(int i=0; i<resultList.size(); i++) {
-				  System.out.print(resultList.get(i).getBzpp_order_no()+ " ");
-				  System.out.println();
-			  }
-			  
-			  System.out.println(resultList);
-			  
-			  return resultList;
-			 
-			
-			
+
+			List<SelectTableVO> resultList = new ArrayList<SelectTableVO>();
+
+			if (!(reqData.get("mbr_phone").equals(""))) {
+
+				String replacePhone = (String) (reqData.get("mbr_phone"));
+				System.out.println("1번 : " + replacePhone);
+				replacePhone = replacePhone.replaceAll("-", "");
+				System.out.println("2번 : " + replacePhone);
+				/* System.out.println("3번" + reqData.get("mbr_phone")); */
+
+				reqData.replace("mbr_phone", (Object) replacePhone);
+				System.out.println("4번 : " + reqData.get("mbr_phone"));
+			}
+
+			resultList = stService.getSelectList(reqData);
+
+			System.out.println("주문번호 ::::: " + resultList);
+			for (int i = 0; i < resultList.size(); i++) {
+				System.out.print(resultList.get(i).getBzpp_order_no() + " ");
+				System.out.println();
+			}
+
+			return resultList;
 	  
 	  }
 	  	
