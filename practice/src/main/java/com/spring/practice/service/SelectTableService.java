@@ -7,7 +7,6 @@ import com.spring.practice.model.SelectTableVO;
 
 public interface SelectTableService {
 
-	List<SelectTableVO> getSelectList(HashMap<String, Object> inq_Data);
+	List<SelectTableVO> getSelectList(HashMap<String, Object> reqData);
 
-	
 }

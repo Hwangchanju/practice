@@ -15,8 +15,9 @@ public class SelectTableServiceImpl implements SelectTableService {
 	private SelectTableDAO stDAO;
 
 	@Override
-	public List<SelectTableVO> getSelectList(HashMap<String, Object> inq_Data) {
+	public List<SelectTableVO> getSelectList(HashMap<String, Object> reqData) {
 
-		return this.getSelectList(inq_Data);
+		return stDAO.getSelectList(reqData);
 	}
+
 }
